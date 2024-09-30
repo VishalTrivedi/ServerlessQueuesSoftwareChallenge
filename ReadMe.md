@@ -48,8 +48,7 @@ The solution is divided into two main projects:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-repository/azure-functions-storage-queue.git
-   cd azure-functions-storage-queue
+   git clone https://github.com/VishalTrivedi/ServerlessQueuesSoftwareChallenge.git
 
 ## Known issues
 
