@@ -79,10 +79,5 @@ public class UserRepository : IUserRepository, IDisposable
         {
             _dbContext.Dispose();
         }
-
-        if (_userInfoDBContextFactory is not null)
-        {
-            _userInfoDBContextFactory.Dispose();
-        }
     }
 }

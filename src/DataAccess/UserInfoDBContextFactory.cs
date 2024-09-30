@@ -7,6 +7,12 @@ namespace DataAccess;
 public class UserInfoDBContextFactory : IDisposable
 {
     private DbConnection _connection;
+    private readonly string _connectionString;
+
+    public UserInfoDBContextFactory()
+    {
+        _connectionString = Environment.GetEnvironmentVariable("DBConnectionString");
+    }
 
     private DbContextOptions<UserInfoDBContext> CreateOptions()
     {
@@ -19,7 +25,7 @@ public class UserInfoDBContextFactory : IDisposable
     {
         if (_connection == null)
         {
-            _connection = new SqliteConnection("Data Source=Mode=Memory;");
+            _connection = new SqliteConnection(_connectionString);
             _connection.Open();
 
             var options = CreateOptions();

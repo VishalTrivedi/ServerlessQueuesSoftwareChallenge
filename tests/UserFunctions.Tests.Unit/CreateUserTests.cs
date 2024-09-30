@@ -15,17 +15,19 @@ namespace UserFunctions.Tests.Unit;
 public class CreateUserTests
 {
     private readonly ILogger<CreateUser> _logger = Substitute.For<ILogger<CreateUser>>();
-    private readonly IUserRepository _userRepository = new UserRepository();
+    private UserInfoDBContextFactory userInfoDBContextFactory = Substitute.For<UserInfoDBContextFactory>();
     private readonly QueueServiceClient _queueServiceClient = Substitute.For<QueueServiceClient>();
     private readonly Faker<User> _userGenerator =
         new Faker<User>()
             .RuleFor(x => x.FirstName, faker => faker.Lorem.Random.Words())
             .RuleFor(x => x.LastName, faker => faker.Lorem.Random.Words());
+    private readonly IUserRepository _userRepository;
 
     private readonly CreateUser _sut;
 
     public CreateUserTests()
     {
+        _userRepository = new UserRepository(userInfoDBContextFactory);
         _sut = new CreateUser(_logger, _userRepository, _queueServiceClient);
     }
 
